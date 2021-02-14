@@ -11,16 +11,16 @@ const BottomTabNav = () => {
   return (
     <BottomTab.Navigator initialRouteName="Home">
       <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ tabBarIcon: () => <FontAwesome name="home" size={30} /> }}
-      />
-      <BottomTab.Screen
         name="Global"
         component={GlobalScreen}
         options={{
           tabBarIcon: () => <FontAwesome name="globe" size={30} />,
         }}
+      />
+      <BottomTab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ tabBarIcon: () => <FontAwesome name="home" size={30} /> }}
       />
       <BottomTab.Screen
         name="User"
