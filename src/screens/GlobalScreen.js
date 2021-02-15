@@ -36,15 +36,13 @@ const GlobalScreen = ({ navigation }) => {
 
   useEffect(() => {
     getCovidData();
-    console.log(covidData);
+    //console.log(covidData);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
       <Title>Global Screen</Title>
-      <View>
-        <Text>Last Updated: {covidData[0].day}</Text>
-      </View>
+      <View>{/* <Text>Last Updated: {covidData[0].day}</Text> */}</View>
       <ContinentSummary
         title="Africa"
         results={filterByContinent("Africa")}

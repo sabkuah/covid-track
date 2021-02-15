@@ -1,14 +1,14 @@
 import { List, ListItem } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const ContinentScreen = ({ route }) => {
+const ContinentScreen = ({ route, navigation }) => {
   const results = route.params;
 
   const sortByMostActiveCases = () => {
     results.sort((a, b) => b.cases.active - a.cases.active);
     return results;
-    //console.log(results);
   };
 
   // useEffect(() => {
@@ -18,22 +18,28 @@ const ContinentScreen = ({ route }) => {
 
   return (
     <View>
-      <Text>{results[0].continent}</Text>
+      <Text>{results[0] ? results[0].continent : ""}</Text>
       <List>
         <ListItem itemDivider>
-          <Text>Countries Affected:</Text>
+          <Text>Countries Most Affected:</Text>
         </ListItem>
         <FlatList
           data={sortByMostActiveCases()}
           keyExtractor={(item) => item.country}
           renderItem={({ item }) => {
             return (
-              <ListItem style={styles.listItem}>
-                <Text>{item.country} </Text>
-                <Text style={styles.activeCases}>
-                  -- Active cases: {item.cases.active.toLocaleString()}
-                </Text>
-              </ListItem>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("CountryScreen", item);
+                }}
+              >
+                <ListItem style={styles.listItem}>
+                  <Text>{item.country} </Text>
+                  <Text style={styles.activeCases}>
+                    -- Active cases: {item.cases.active.toLocaleString()}
+                  </Text>
+                </ListItem>
+              </TouchableOpacity>
             );
           }}
         />

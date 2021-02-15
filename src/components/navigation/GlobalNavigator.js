@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Platform } from "react-native";
 import GlobalScreen from "../../screens/GlobalScreen";
 import ContinentScreen from "../../screens/ContinentScreen";
+import CountryScreen from "../../screens/CountryScreen";
 
 const GlobalStack = createStackNavigator();
 
@@ -19,7 +20,7 @@ const GlobalNavigator = () => {
                 headerRight: () => <MenuIcon />,
               }
             : {
-                headerTitle: "Single-Layer Stack",
+                headerTitle: "Global Data",
               }
         }
       />
@@ -32,7 +33,20 @@ const GlobalNavigator = () => {
                 headerRight: () => <MenuIcon />,
               }
             : {
-                headerTitle: "Single-Layer Stack",
+                headerTitle: "Continent Data",
+              }
+        }
+      />
+      <GlobalStack.Screen
+        name="CountryScreen"
+        component={CountryScreen}
+        options={
+          Platform.OS === "android"
+            ? {
+                headerRight: () => <MenuIcon />,
+              }
+            : {
+                headerTitle: "Country Data",
               }
         }
       />
