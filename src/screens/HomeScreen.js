@@ -8,16 +8,6 @@ import ContinentSummary from "../components/navigation/ContinentSummary";
 const HomeScreen = () => {
   const [covidData, setCovidData] = useState([]);
 
-  // const getCovidData = async () => {
-  //   try {
-  //     const response = await covidAPI.get("/statistics");
-  //     setCovidData(response);
-  //     console.log("covid data>>>", covidData);
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   const options = {
     method: "GET",
     url: "https://covid-193.p.rapidapi.com/statistics",
@@ -45,20 +35,9 @@ const HomeScreen = () => {
     });
   };
 
-  // const filterByContinent = async (continent) => {
-  //   let filteredData = [];
-  //   await covidData.forEach(function (item) {
-  //     if (item.continent === continent) {
-  //       filteredData.push(item);
-  //     }
-  //   });
-
-  //   console.log(filteredData);
-  // };
-
   useEffect(() => {
     getCovidData();
-    console.log(covidData);
+    //console.log(covidData);
   }, []);
 
   return (
@@ -73,7 +52,25 @@ const HomeScreen = () => {
           <Text>REGISTER</Text>
         </Button>
       </View>
+      <ContinentSummary title="Africa" results={filterByContinent("Africa")} />
+      <ContinentSummary
+        title="Antarctica"
+        results={filterByContinent("Antarctica")}
+      />
       <ContinentSummary title="Asia" results={filterByContinent("Asia")} />
+      <ContinentSummary title="Europe" results={filterByContinent("Europe")} />
+      <ContinentSummary
+        title="North America"
+        results={filterByContinent("North-America")}
+      />
+      <ContinentSummary
+        title="Oceania"
+        results={filterByContinent("Oceania")}
+      />
+      <ContinentSummary
+        title="South America"
+        results={filterByContinent("South-America")}
+      />
     </SafeAreaView>
   );
 };
