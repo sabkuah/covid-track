@@ -24,13 +24,13 @@ const ContinentSummary = ({ title, results, navigation }) => {
   };
 
   useEffect(() => {
-    //console.log("active cases>>>>>>>", getTotalActiveCases());
+    //console.log("results from summ>>>>>>>", results);
   }, []);
   return (
     <View>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("ContinentScreen");
+          navigation.navigate("ContinentScreen", results);
         }}
       >
         <Card style={styles.card}>

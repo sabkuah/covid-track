@@ -3,7 +3,7 @@ import MenuIcon from "./MenuIcon";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Platform } from "react-native";
 import GlobalScreen from "../../screens/GlobalScreen";
-import ContinentScreen from "./ContinentDetail";
+import ContinentScreen from "../../screens/ContinentScreen";
 
 const GlobalStack = createStackNavigator();
 
