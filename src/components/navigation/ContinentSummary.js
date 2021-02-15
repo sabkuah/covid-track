@@ -1,20 +1,31 @@
+import { Card, CardItem, Body } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, FlatList } from "react-native";
 
 const ContinentSummary = ({ title, results }) => {
+  const getTotalActiveCases = () => {
+    let totalActiveCases = 0;
+
+    results.forEach((item) => {
+      totalActiveCases += item.cases.active;
+    });
+
+    return totalActiveCases;
+  };
+
   useEffect(() => {
-    //console.log("RESULTS>>>>>>>", results);
+    console.log("active cases>>>>>>>", getTotalActiveCases());
   }, []);
   return (
     <View>
-      <Text>{title}</Text>
-      <FlatList
-        data={results}
-        keyExtractor={(item) => item.country}
-        renderItem={({ item }) => {
-          return <Text>{item.country}</Text>;
-        }}
-      />
+      <Card>
+        <CardItem>
+          <Body>
+            <Text>{title}</Text>
+            <Text>Total Active Cases: {getTotalActiveCases()}</Text>
+          </Body>
+        </CardItem>
+      </Card>
     </View>
   );
 };
