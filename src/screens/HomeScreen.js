@@ -5,7 +5,7 @@ import { Button } from "native-base";
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>COVID LENS</Text>
+      <Text style={styles.heading}>COVID Tracker</Text>
       <Text>Daily Case Count:</Text>
       <View style={styles.auth}>
         <Button success style={styles.button}>

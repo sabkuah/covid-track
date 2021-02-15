@@ -1,14 +1,15 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { Card, CardItem, Body } from "native-base";
 import React, { useEffect } from "react";
-import { StyleSheet, View, Text, FlatList } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-const ContinentSummary = ({ title, results }) => {
+const ContinentSummary = ({ title, results, navigation }) => {
   const getTotalActiveCases = () => {
     let totalActiveCases = 0;
     results.forEach((item) => {
       totalActiveCases += item.cases.active;
     });
-    return totalActiveCases;
+    return totalActiveCases.toLocaleString();
   };
 
   const getTotalNewCases = () => {
@@ -19,7 +20,7 @@ const ContinentSummary = ({ title, results }) => {
         totalNewCases += newCases;
       }
     });
-    return totalNewCases;
+    return totalNewCases.toLocaleString();
   };
 
   useEffect(() => {
@@ -27,15 +28,21 @@ const ContinentSummary = ({ title, results }) => {
   }, []);
   return (
     <View>
-      <Card style={styles.card}>
-        <CardItem>
-          <Body>
-            <Text style={styles.heading}>{title}</Text>
-            <Text>Total Active Cases: {getTotalActiveCases()}</Text>
-            <Text>Total New Cases: {getTotalNewCases()}</Text>
-          </Body>
-        </CardItem>
-      </Card>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("ContinentScreen");
+        }}
+      >
+        <Card style={styles.card}>
+          <CardItem>
+            <Body>
+              <Text style={styles.heading}>{title}</Text>
+              <Text>Active Cases: {getTotalActiveCases()}</Text>
+              <Text>New Cases: {getTotalNewCases()}</Text>
+            </Body>
+          </CardItem>
+        </Card>
+      </TouchableOpacity>
     </View>
   );
 };
