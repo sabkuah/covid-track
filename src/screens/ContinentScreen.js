@@ -1,4 +1,4 @@
-import { List, ListItem } from "native-base";
+import { List, ListItem, Title } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -11,39 +11,38 @@ const ContinentScreen = ({ route, navigation }) => {
     return results;
   };
 
-  // useEffect(() => {
-  //   console.log(route);
-  //   console.log("results from detail>>>>>>>", results);
-  // }, []);
-
   return (
     <View>
-      <Text>{results[0] ? results[0].continent : ""}</Text>
-      <List>
-        <ListItem itemDivider>
-          <Text>Countries Most Affected:</Text>
-        </ListItem>
-        <FlatList
-          data={sortByMostActiveCases()}
-          keyExtractor={(item) => item.country}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("CountryScreen", item);
-                }}
-              >
-                <ListItem style={styles.listItem}>
-                  <Text>{item.country} </Text>
-                  <Text style={styles.activeCases}>
-                    -- Active cases: {item.cases.active.toLocaleString()}
-                  </Text>
-                </ListItem>
-              </TouchableOpacity>
-            );
-          }}
-        />
-      </List>
+      <Title>{results[0] ? results[0].continent : ""}</Title>
+      {results && results.length > 0 ? (
+        <List>
+          <ListItem itemDivider>
+            <Text>Countries Most Affected:</Text>
+          </ListItem>
+          <FlatList
+            data={sortByMostActiveCases()}
+            keyExtractor={(item) => item.country}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("CountryScreen", item);
+                  }}
+                >
+                  <ListItem style={styles.listItem}>
+                    <Text>{item.country} </Text>
+                    <Text style={styles.activeCases}>
+                      -- Active cases: {item.cases.active.toLocaleString()}
+                    </Text>
+                  </ListItem>
+                </TouchableOpacity>
+              );
+            }}
+          />
+        </List>
+      ) : (
+        <Text>No cases reported.</Text>
+      )}
     </View>
   );
 };

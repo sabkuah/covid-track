@@ -82,11 +82,11 @@ const GlobalScreen = ({ navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "stretch",
-  },
+  // container: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "stretch",
+  // },
 });
 
 export default GlobalScreen;
