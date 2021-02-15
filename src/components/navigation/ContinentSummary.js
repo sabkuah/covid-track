@@ -37,8 +37,8 @@ const ContinentSummary = ({ title, results, navigation }) => {
           <CardItem>
             <Body>
               <Text style={styles.heading}>{title}</Text>
-              <Text>Active Cases: {getTotalActiveCases()}</Text>
               <Text>New Cases: {getTotalNewCases()}</Text>
+              <Text>Active Cases: {getTotalActiveCases()}</Text>
             </Body>
           </CardItem>
         </Card>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import { StyleSheet, SafeAreaView, Text, View } from "react-native";
+import { Title } from "native-base";
 import axios from "axios";
 import ContinentSummary from "../components/navigation/ContinentSummary";
 
@@ -35,12 +36,15 @@ const GlobalScreen = ({ navigation }) => {
 
   useEffect(() => {
     getCovidData();
-    //console.log(covidData);
+    console.log(covidData);
   }, []);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Global Screen</Text>
+      <Title>Global Screen</Title>
+      <View>
+        <Text>Last Updated: {covidData[0].day}</Text>
+      </View>
       <ContinentSummary
         title="Africa"
         results={filterByContinent("Africa")}
