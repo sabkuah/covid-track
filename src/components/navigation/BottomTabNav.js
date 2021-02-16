@@ -4,6 +4,7 @@ import HomeScreen from "../../screens/HomeScreen";
 import { FontAwesome } from "@expo/vector-icons";
 import UserDashboardScreen from "../../screens/UserDashboardScreen";
 import GlobalScreen from "../../screens/GlobalScreen";
+import GlobalNavigator from "./GlobalNavigator";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -12,7 +13,7 @@ const BottomTabNav = () => {
     <BottomTab.Navigator initialRouteName="Home">
       <BottomTab.Screen
         name="Global"
-        component={GlobalScreen}
+        component={GlobalNavigator}
         options={{
           tabBarIcon: () => <FontAwesome name="globe" size={30} />,
         }}

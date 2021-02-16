@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, SafeAreaView, Text } from "react-native";
+import { StyleSheet, SafeAreaView, Text, View } from "react-native";
+import { Title } from "native-base";
 import axios from "axios";
 import ContinentSummary from "../components/navigation/ContinentSummary";
 
-const GlobalScreen = () => {
+const GlobalScreen = ({ navigation }) => {
   const [covidData, setCovidData] = useState([]);
 
   const options = {
@@ -40,35 +41,52 @@ const GlobalScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Global Screen</Text>
-      <ContinentSummary title="Africa" results={filterByContinent("Africa")} />
+      <Title>Global Screen</Title>
+      <View>{/* <Text>Last Updated: {covidData[0].day}</Text> */}</View>
+      <ContinentSummary
+        title="Africa"
+        results={filterByContinent("Africa")}
+        navigation={navigation}
+      />
       <ContinentSummary
         title="Antarctica"
         results={filterByContinent("Antarctica")}
+        navigation={navigation}
       />
-      <ContinentSummary title="Asia" results={filterByContinent("Asia")} />
-      <ContinentSummary title="Europe" results={filterByContinent("Europe")} />
+      <ContinentSummary
+        title="Asia"
+        results={filterByContinent("Asia")}
+        navigation={navigation}
+      />
+      <ContinentSummary
+        title="Europe"
+        results={filterByContinent("Europe")}
+        navigation={navigation}
+      />
       <ContinentSummary
         title="North America"
         results={filterByContinent("North-America")}
+        navigation={navigation}
       />
       <ContinentSummary
         title="Oceania"
         results={filterByContinent("Oceania")}
+        navigation={navigation}
       />
       <ContinentSummary
         title="South America"
         results={filterByContinent("South-America")}
+        navigation={navigation}
       />
     </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "stretch",
-  },
+  // container: {
+  //   flex: 1,
+  //   justifyContent: "center",
+  //   alignItems: "stretch",
+  // },
 });
 
 export default GlobalScreen;
