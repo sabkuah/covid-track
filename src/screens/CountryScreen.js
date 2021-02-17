@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ListItem, Title, List } from "native-base";
+import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
+import { MAPBOX_TOKEN } from "dotenv";
 
 const CountryScreen = ({ route }) => {
   const data = route.params;
+  const geocoder = mbxGeocoding({ accessToken: MAPBOX_TOKEN });
+
+  const getGeoCode = async () => {
+    const geoData = await geocoder
+      .forwardGeocode({
+        query: "Vancouver, CA",
+        limit: 1,
+      })
+      .send();
+    console.log(geoData.body.features[0].geometry.coordinates);
+  };
+
+  useEffect(() => {
+    getGeoCode();
+  }, []);
 
   return (
     <View>

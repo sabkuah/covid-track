@@ -3,6 +3,7 @@ import { StyleSheet, SafeAreaView, Text, View } from "react-native";
 import { Title } from "native-base";
 import axios from "axios";
 import ContinentSummary from "../components/navigation/ContinentSummary";
+import { API_KEY } from "dotenv";
 
 const GlobalScreen = ({ navigation }) => {
   const [covidData, setCovidData] = useState([]);
@@ -11,7 +12,7 @@ const GlobalScreen = ({ navigation }) => {
     method: "GET",
     url: "https://covid-193.p.rapidapi.com/statistics",
     headers: {
-      "x-rapidapi-key": "35062213abmsh4851657f6e21028p101833jsn397fb1c7ac58",
+      "x-rapidapi-key": API_KEY,
       "x-rapidapi-host": "covid-193.p.rapidapi.com",
     },
     parameters: ["Canada"],
