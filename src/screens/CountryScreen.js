@@ -1,29 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ListItem, Title, List } from "native-base";
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
 import { MAPBOX_TOKEN } from "dotenv";
+import MapView from "react-native-maps";
 
 const CountryScreen = ({ route }) => {
   const data = route.params;
   const geocoder = mbxGeocoding({ accessToken: MAPBOX_TOKEN });
+  const [coordinates, setCoordinates] = useState([-123.120735, 49.28273]); //default to Vancouver
 
   const getGeoCode = async () => {
     const geoData = await geocoder
       .forwardGeocode({
-        query: "Vancouver, CA",
+        query: data.country,
         limit: 1,
       })
       .send();
-    console.log(geoData.body.features[0].geometry.coordinates);
+    const foundCoordinates = await geoData.body.features[0].geometry //stores array of coordinates
+      .coordinates;
+
+    if (foundCoordinates) {
+      console.log("foundCoord", foundCoordinates);
+      return await foundCoordinates;
+      //   setCoordinates(foundCoordinates);
+    }
+
+    //setCoordinates(foundCoordinates); //store coordinates in state
   };
 
   useEffect(() => {
-    getGeoCode();
+    getGeoCode().then((data) => setCoordinates(data));
+    //getGeoCode();
+    console.log("useEffect>>", coordinates);
   }, []);
 
   return (
     <View>
+      <MapView
+        initialRegion={{
+          latitude: coordinates[1],
+          longitude: coordinates[0],
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}
+        style={styles.map}
+      />
       <Title>{data.country}</Title>
       <List>
         <ListItem>
@@ -55,4 +77,31 @@ const CountryScreen = ({ route }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  map: {
+    height: "50%",
+    width: "100%",
+  },
+});
+
 export default CountryScreen;
+
+//   const getGeoCode = async () => {
+//     console.log("default>>", coordinates);
+//     const geoData = await geocoder
+//       .forwardGeocode({
+//         query: data.country,
+//         limit: 1,
+//       })
+//       .send();
+//     console.log(data.country);
+//     console.log("raw>>", geoData.body.features[0].geometry.coordinates);
+//     const foundCoordinates = await geoData.body.features[0].geometry
+//       .coordinates;
+//     console.log("foundCoordinates>>", foundCoordinates);
+//     await setCoordinates(foundCoordinates);
+//     console.log("coordinates>>", coordinates);
+//     console.log(coordinates[0]);
+//   };
+
+//-123.120735, 49.28273
