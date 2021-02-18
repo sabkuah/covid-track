@@ -47,3 +47,11 @@ Object {
 },
 "time": "2021-02-15T22:30:06+00:00",
 },
+
+## Color Palette
+
+Flame e4572e
+Max Blue Green 17BEBB
+Sunglow FFC914
+Raisin Black 2E282A
+Green RYB 76B041
