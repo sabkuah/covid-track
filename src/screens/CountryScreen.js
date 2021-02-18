@@ -8,7 +8,13 @@ import MapView from "react-native-maps";
 const CountryScreen = ({ route }) => {
   const data = route.params;
   const geocoder = mbxGeocoding({ accessToken: MAPBOX_TOKEN });
-  const [coordinates, setCoordinates] = useState([-123.120735, 49.28273]); //default to Vancouver
+  const [coordinates, setCoordinates] = useState([]); //default to Vancouver
+  const [region, setRegion] = useState({
+    latitude: coordinates[1],
+    longitude: coordinates[0],
+    latitudeDelta: 4.0922,
+    longitudeDelta: 4.0421,
+  });
 
   const getGeoCode = async () => {
     const geoData = await geocoder
@@ -17,37 +23,44 @@ const CountryScreen = ({ route }) => {
         limit: 1,
       })
       .send();
-    const foundCoordinates = await geoData.body.features[0].geometry //stores array of coordinates
-      .coordinates;
 
-    if (foundCoordinates) {
-      console.log("foundCoord", foundCoordinates);
-      return await foundCoordinates;
-      //   setCoordinates(foundCoordinates);
-    }
+    const long = geoData.body.features[0].geometry.coordinates[0];
+    const lat = geoData.body.features[0].geometry.coordinates[1];
 
-    //setCoordinates(foundCoordinates); //store coordinates in state
+    return {
+      latitude: lat,
+      longitude: long,
+      latitudeDelta: 4.0922,
+      longitudeDelta: 4.0421,
+    };
+  };
+
+  const onRegionChange = (region) => {
+    setRegion(region);
   };
 
   useEffect(() => {
-    getGeoCode().then((data) => setCoordinates(data));
-    //getGeoCode();
-    console.log("useEffect>>", coordinates);
+    (async () => {
+      const result = await getGeoCode();
+      onRegionChange(result);
+    })();
   }, []);
 
   return (
     <View>
       <MapView
-        initialRegion={{
-          latitude: coordinates[1],
-          longitude: coordinates[0],
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
+        region={region}
+        onRegionChange={onRegionChange}
         style={styles.map}
       />
       <Title>{data.country}</Title>
       <List>
+        <ListItem>
+          <Text>Latitude: {region.latitude}</Text>
+        </ListItem>
+        <ListItem>
+          <Text>Longitude: {region.longitude}</Text>
+        </ListItem>
         <ListItem>
           <Text>
             Active Cases:{" "}
@@ -85,23 +98,3 @@ const styles = StyleSheet.create({
 });
 
 export default CountryScreen;
-
-//   const getGeoCode = async () => {
-//     console.log("default>>", coordinates);
-//     const geoData = await geocoder
-//       .forwardGeocode({
-//         query: data.country,
-//         limit: 1,
-//       })
-//       .send();
-//     console.log(data.country);
-//     console.log("raw>>", geoData.body.features[0].geometry.coordinates);
-//     const foundCoordinates = await geoData.body.features[0].geometry
-//       .coordinates;
-//     console.log("foundCoordinates>>", foundCoordinates);
-//     await setCoordinates(foundCoordinates);
-//     console.log("coordinates>>", coordinates);
-//     console.log(coordinates[0]);
-//   };
-
-//-123.120735, 49.28273
