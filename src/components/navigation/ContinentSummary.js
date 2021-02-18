@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Card, CardItem, Body } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import base from "../../styles/styles";
 
 const ContinentSummary = ({ title, results, navigation }) => {
   const getTotalActiveCases = () => {
@@ -34,11 +35,23 @@ const ContinentSummary = ({ title, results, navigation }) => {
         }}
       >
         <Card style={styles.card}>
-          <CardItem>
+          <CardItem style={{ backgroundColor: "#FFC914" }}>
             <Body>
-              <Text style={styles.heading}>{title}</Text>
-              <Text>New Cases: {getTotalNewCases()}</Text>
-              <Text>Active Cases: {getTotalActiveCases()}</Text>
+              <Text style={base.subheadingBold}>{title.toUpperCase()}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  padding: "3%",
+                }}
+              >
+                <Text style={({ margin: "1%" }, base.textBold)}>
+                  New: {getTotalNewCases()}
+                </Text>
+                <Text style={({ margin: "1%" }, base.textBold)}>
+                  Active: {getTotalActiveCases()}
+                </Text>
+              </View>
             </Body>
           </CardItem>
         </Card>
@@ -50,6 +63,7 @@ const ContinentSummary = ({ title, results, navigation }) => {
 const styles = StyleSheet.create({
   card: {
     width: "80%",
+    backgroundColor: "#17BEBB",
   },
   heading: {
     fontWeight: "bold",
