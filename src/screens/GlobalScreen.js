@@ -44,9 +44,8 @@ const GlobalScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={base.container}>
-      <Title>Global Screen</Title>
       <View>{/* <Text>Last Updated: {covidData[0].day}</Text> */}</View>
-      <View style={{ width: "100%" }}>
+      <View style={{ width: "100%", alignSelf: "center" }}>
         <ContinentSummary
           title="Africa"
           results={filterByContinent("Africa")}

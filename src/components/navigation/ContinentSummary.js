@@ -41,16 +41,20 @@ const ContinentSummary = ({ title, results, navigation }) => {
               <View
                 style={{
                   flexDirection: "row",
-                  justifyContent: "space-around",
+                  justifyContent: "space-between",
                   padding: "3%",
                 }}
               >
-                <Text style={({ margin: "1%" }, base.textBold)}>
-                  New: {getTotalNewCases()}
-                </Text>
-                <Text style={({ margin: "1%" }, base.textBold)}>
-                  Active: {getTotalActiveCases()}
-                </Text>
+                <View>
+                  <Text style={({ margin: "1%" }, base.textBold)}>
+                    New: {getTotalNewCases()}
+                  </Text>
+                </View>
+                <View>
+                  <Text style={({ margin: "1%" }, base.textBold)}>
+                    Active: {getTotalActiveCases()}
+                  </Text>
+                </View>
               </View>
             </Body>
           </CardItem>
