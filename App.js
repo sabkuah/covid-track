@@ -5,6 +5,8 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { DataProvider } from "./src/context/DataContext";
 import { API_KEY } from "dotenv";
 import axios from "axios";
+import firebaseConfig from "./src/api/firebase";
+import * as firebase from "firebase";
 
 import BottomTabNav from "./src/components/navigation/BottomTabNav";
 import DrawerNav from "./src/components/navigation/DrawerNav";
@@ -16,6 +18,10 @@ const PlatformSpecificNavigator = Platform.select({
   ios: () => BottomTabNav,
   android: () => DrawerNav,
 })();
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   const [covidData, setCovidData] = useState([]);
