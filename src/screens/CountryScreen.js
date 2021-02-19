@@ -85,9 +85,6 @@ const CountryScreen = ({ route }) => {
               {data.cases.total ? data.cases.total.toLocaleString() : 0}
             </Text>
           </ListItem>
-          <ListItem>
-            <Text>{test.name}</Text>
-          </ListItem>
         </List>
       </View>
     );

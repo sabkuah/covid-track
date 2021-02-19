@@ -1,34 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, SafeAreaView, Text, View } from "react-native";
-import { Title } from "native-base";
-import axios from "axios";
+import DataContext from "../context/DataContext";
 import ContinentSummary from "../components/navigation/ContinentSummary";
-import { API_KEY } from "dotenv";
+
 import base from "../styles/styles";
 
 const GlobalScreen = ({ navigation }) => {
-  const [covidData, setCovidData] = useState([]);
-
-  const options = {
-    method: "GET",
-    url: "https://covid-193.p.rapidapi.com/statistics",
-    headers: {
-      "x-rapidapi-key": API_KEY,
-      "x-rapidapi-host": "covid-193.p.rapidapi.com",
-    },
-    parameters: ["Canada"],
-  };
-
-  const getCovidData = () => {
-    axios
-      .request(options)
-      .then(function (response) {
-        setCovidData(response.data.response);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };
+  const covidData = useContext(DataContext);
 
   const filterByContinent = (continent) => {
     return covidData.filter((data) => {
@@ -36,13 +14,7 @@ const GlobalScreen = ({ navigation }) => {
     });
   };
 
-  useEffect(() => {
-    getCovidData();
-
-    console.log(covidData);
-  }, []);
-
-  //<Text>Last Updated: {covidData[0].day}</Text>
+  useEffect(() => {}, []);
 
   return (
     <View style={base.container}>
@@ -53,6 +25,7 @@ const GlobalScreen = ({ navigation }) => {
           alignSelf: "stretch",
         }}
       >
+        <Text style={base.subheading}>Last Updated: {covidData[0].day}</Text>
         <ContinentSummary
           title="Africa"
           results={filterByContinent("Africa")}

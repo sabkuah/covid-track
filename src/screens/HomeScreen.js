@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, SafeAreaView, Text, View } from "react-native";
 import { Button } from "native-base";
 import base from "../styles/styles";
 import { FontAwesome } from "@expo/vector-icons";
+import DataContext from "../context/DataContext";
 
 const HomeScreen = () => {
+  const covidData = useContext(DataContext);
+
   return (
     <SafeAreaView style={base.container}>
       <View style={{ flex: 1, marginTop: 80, alignItems: "center" }}>
@@ -20,6 +23,7 @@ const HomeScreen = () => {
         }}
       >
         <Text style={base.subheadingBold}>Daily Case Count:</Text>
+        <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
       </View>
       <View style={{ flex: 1, flexDirection: "row" }}>
         <View
@@ -31,6 +35,7 @@ const HomeScreen = () => {
           }}
         >
           <Text style={base.subheadingBold}>Recovered</Text>
+          <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
         </View>
         <View
           style={{
@@ -41,6 +46,7 @@ const HomeScreen = () => {
           }}
         >
           <Text style={base.subheadingBold}>Deaths</Text>
+          <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
         </View>
       </View>
       <View style={styles.auth}>
