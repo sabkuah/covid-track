@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { DataProvider } from "./src/context/DataContext";
-import { API_KEY } from "dotenv";
+import options from "./src/api/covidAPI";
 import axios from "axios";
 import firebaseConfig from "./src/api/firebase";
 import * as firebase from "firebase";
@@ -25,16 +25,6 @@ if (firebase.apps.length === 0) {
 
 export default function App() {
   const [covidData, setCovidData] = useState([]);
-
-  const options = {
-    method: "GET",
-    url: "https://covid-193.p.rapidapi.com/statistics",
-    headers: {
-      "x-rapidapi-key": API_KEY,
-      "x-rapidapi-host": "covid-193.p.rapidapi.com",
-    },
-    parameters: ["Canada"],
-  };
 
   const getCovidData = () => {
     let mounted = true;

@@ -2,7 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { Card, CardItem, Body } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import base from "../../styles/styles";
+import base from "../styles/styles";
 
 const ContinentSummary = ({ title, results, navigation }) => {
   const getTotalActiveCases = () => {

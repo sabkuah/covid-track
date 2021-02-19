@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { StyleSheet, SafeAreaView, Text, View } from "react-native";
 import DataContext from "../context/DataContext";
-import ContinentSummary from "../components/navigation/ContinentSummary";
+import ContinentSummary from "../components/ContinentSummary";
 
 import base from "../styles/styles";
 

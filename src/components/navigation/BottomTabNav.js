@@ -2,9 +2,8 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import HomeScreen from "../../screens/HomeScreen";
 import { FontAwesome } from "@expo/vector-icons";
-import UserDashboardScreen from "../../screens/UserDashboardScreen";
-import GlobalScreen from "../../screens/GlobalScreen";
 import GlobalNavigator from "./GlobalNavigator";
+import UserNavigator from "./UserNavigator";
 
 const BottomTab = createBottomTabNavigator();
 
@@ -25,7 +24,7 @@ const BottomTabNav = () => {
       />
       <BottomTab.Screen
         name="User"
-        component={UserDashboardScreen}
+        component={UserNavigator}
         options={{ tabBarIcon: () => <FontAwesome name="user" size={30} /> }}
       />
     </BottomTab.Navigator>
