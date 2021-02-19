@@ -6,6 +6,7 @@ import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
 import { MAPBOX_TOKEN } from "dotenv";
 import MapView from "react-native-maps";
 import Loading from "./Loading";
+import base from "../styles/styles";
 
 const CountryScreen = ({ route }) => {
   const data = route.params;
@@ -47,44 +48,44 @@ const CountryScreen = ({ route }) => {
   if (!region) return <Loading />;
   else {
     return (
-      <View>
+      <View style={base.container}>
         <MapView
           region={region}
           onRegionChange={onRegionChange}
           style={styles.map}
         />
-        <Title>{data.country}</Title>
-        <List>
+        <Title style={base.subheadingBold}>{data.country}</Title>
+        <List style={{ width: "80%" }}>
           <ListItem>
-            <Text>Latitude: {region.latitude}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>Longitude: {region.longitude}</Text>
-          </ListItem>
-          <ListItem>
-            <Text>
+            <Text style={base.subheading}>
               Active Cases:{" "}
               {data.cases.active ? data.cases.active.toLocaleString() : 0}
             </Text>
           </ListItem>
           <ListItem>
-            <Text>
+            <Text style={base.subheading}>
               New Cases:{" "}
               {data.cases.new ? data.cases.new.slice(1).toLocaleString() : 0}
             </Text>
           </ListItem>
           <ListItem>
-            <Text>
+            <Text style={base.subheading}>
               Critical Cases:{" "}
               {data.cases.critical ? data.cases.critical.toLocaleString() : 0}
             </Text>
           </ListItem>
           <ListItem>
-            <Text>
+            <Text style={base.subheading}>
               Total Cases:{" "}
               {data.cases.total ? data.cases.total.toLocaleString() : 0}
             </Text>
           </ListItem>
+          {/* <ListItem>
+            <Text style={base.subheading}>Latitude: {region.latitude}</Text>
+          </ListItem>
+          <ListItem>
+            <Text style={base.subheading}>Longitude: {region.longitude}</Text>
+          </ListItem> */}
         </List>
       </View>
     );

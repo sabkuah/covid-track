@@ -25,7 +25,7 @@ const GlobalScreen = ({ navigation }) => {
           alignSelf: "stretch",
         }}
       >
-        <Text style={base.subheading}>Last Updated: {covidData[0].day}</Text>
+        <Text style={base.textBold}>Last Updated: {covidData[0].day}</Text>
         <ContinentSummary
           title="Africa"
           results={filterByContinent("Africa")}

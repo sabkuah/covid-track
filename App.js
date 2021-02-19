@@ -46,8 +46,10 @@ export default function App() {
   };
 
   useEffect(() => {
-    getCovidData();
-    console.log(covidData);
+    (async () => {
+      await getCovidData();
+    })();
+    //console.log(covidData);
   }, []);
 
   if (covidData && covidData.length > 1) {
