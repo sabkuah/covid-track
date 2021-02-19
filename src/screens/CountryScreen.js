@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import DataContext from "../context/DataContext";
 import { StyleSheet, View, Text } from "react-native";
 import { ListItem, Title, List } from "native-base";
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
@@ -11,12 +12,7 @@ const CountryScreen = ({ route }) => {
   const geocoder = mbxGeocoding({ accessToken: MAPBOX_TOKEN });
 
   const [region, setRegion] = useState();
-  //       {
-  //     // latitude: 49.28273,
-  //     // longitude: -123.120735,
-  //     // latitudeDelta: 4.0922,
-  //     // longitudeDelta: 4.0421,
-  //   }
+  const test = useContext(DataContext);
 
   const getGeoCode = async () => {
     const geoData = await geocoder
@@ -88,6 +84,9 @@ const CountryScreen = ({ route }) => {
               Total Cases:{" "}
               {data.cases.total ? data.cases.total.toLocaleString() : 0}
             </Text>
+          </ListItem>
+          <ListItem>
+            <Text>{test.name}</Text>
           </ListItem>
         </List>
       </View>
