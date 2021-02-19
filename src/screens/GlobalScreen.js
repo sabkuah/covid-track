@@ -39,7 +39,7 @@ const GlobalScreen = ({ navigation }) => {
   useEffect(() => {
     getCovidData();
 
-    //console.log(covidData);
+    console.log(covidData);
   }, []);
 
   return (

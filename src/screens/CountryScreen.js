@@ -4,17 +4,19 @@ import { ListItem, Title, List } from "native-base";
 import mbxGeocoding from "@mapbox/mapbox-sdk/services/geocoding";
 import { MAPBOX_TOKEN } from "dotenv";
 import MapView from "react-native-maps";
+import Loading from "./Loading";
 
 const CountryScreen = ({ route }) => {
   const data = route.params;
   const geocoder = mbxGeocoding({ accessToken: MAPBOX_TOKEN });
-  const [coordinates, setCoordinates] = useState([]); //default to Vancouver
-  const [region, setRegion] = useState({
-    latitude: coordinates[1],
-    longitude: coordinates[0],
-    latitudeDelta: 4.0922,
-    longitudeDelta: 4.0421,
-  });
+
+  const [region, setRegion] = useState();
+  //       {
+  //     // latitude: 49.28273,
+  //     // longitude: -123.120735,
+  //     // latitudeDelta: 4.0922,
+  //     // longitudeDelta: 4.0421,
+  //   }
 
   const getGeoCode = async () => {
     const geoData = await geocoder
@@ -46,48 +48,51 @@ const CountryScreen = ({ route }) => {
     })();
   }, []);
 
-  return (
-    <View>
-      <MapView
-        region={region}
-        onRegionChange={onRegionChange}
-        style={styles.map}
-      />
-      <Title>{data.country}</Title>
-      <List>
-        <ListItem>
-          <Text>Latitude: {region.latitude}</Text>
-        </ListItem>
-        <ListItem>
-          <Text>Longitude: {region.longitude}</Text>
-        </ListItem>
-        <ListItem>
-          <Text>
-            Active Cases:{" "}
-            {data.cases.active ? data.cases.active.toLocaleString() : 0}
-          </Text>
-        </ListItem>
-        <ListItem>
-          <Text>
-            New Cases:{" "}
-            {data.cases.new ? data.cases.new.slice(1).toLocaleString() : 0}
-          </Text>
-        </ListItem>
-        <ListItem>
-          <Text>
-            Critical Cases:{" "}
-            {data.cases.critical ? data.cases.critical.toLocaleString() : 0}
-          </Text>
-        </ListItem>
-        <ListItem>
-          <Text>
-            Total Cases:{" "}
-            {data.cases.total ? data.cases.total.toLocaleString() : 0}
-          </Text>
-        </ListItem>
-      </List>
-    </View>
-  );
+  if (!region) return <Loading />;
+  else {
+    return (
+      <View>
+        <MapView
+          region={region}
+          onRegionChange={onRegionChange}
+          style={styles.map}
+        />
+        <Title>{data.country}</Title>
+        <List>
+          <ListItem>
+            <Text>Latitude: {region.latitude}</Text>
+          </ListItem>
+          <ListItem>
+            <Text>Longitude: {region.longitude}</Text>
+          </ListItem>
+          <ListItem>
+            <Text>
+              Active Cases:{" "}
+              {data.cases.active ? data.cases.active.toLocaleString() : 0}
+            </Text>
+          </ListItem>
+          <ListItem>
+            <Text>
+              New Cases:{" "}
+              {data.cases.new ? data.cases.new.slice(1).toLocaleString() : 0}
+            </Text>
+          </ListItem>
+          <ListItem>
+            <Text>
+              Critical Cases:{" "}
+              {data.cases.critical ? data.cases.critical.toLocaleString() : 0}
+            </Text>
+          </ListItem>
+          <ListItem>
+            <Text>
+              Total Cases:{" "}
+              {data.cases.total ? data.cases.total.toLocaleString() : 0}
+            </Text>
+          </ListItem>
+        </List>
+      </View>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
