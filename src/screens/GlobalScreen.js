@@ -42,10 +42,17 @@ const GlobalScreen = ({ navigation }) => {
     console.log(covidData);
   }, []);
 
+  //<Text>Last Updated: {covidData[0].day}</Text>
+
   return (
-    <SafeAreaView style={base.container}>
-      <View>{/* <Text>Last Updated: {covidData[0].day}</Text> */}</View>
-      <View style={{ width: "100%", alignSelf: "center" }}>
+    <View style={base.container}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: "center",
+          alignSelf: "stretch",
+        }}
+      >
         <ContinentSummary
           title="Africa"
           results={filterByContinent("Africa")}
@@ -82,7 +89,7 @@ const GlobalScreen = ({ navigation }) => {
           navigation={navigation}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 const styles = StyleSheet.create({

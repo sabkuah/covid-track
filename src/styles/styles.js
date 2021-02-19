@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#2E282A",
     alignItems: "center",
-    //justifyContent: "center",
+    justifyContent: "center",
   },
   heading: {
     color: "white",
