@@ -47,4 +47,11 @@ export default StyleSheet.create({
     fontSize: 50,
     padding: "1%",
   },
+  smallNumber: {
+    color: "white",
+    alignSelf: "center",
+    fontWeight: "900",
+    fontSize: 40,
+    padding: "1%",
+  },
 });
