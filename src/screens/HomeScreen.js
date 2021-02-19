@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, SafeAreaView, Text, View } from "react-native";
 import { Button } from "native-base";
 import base from "../styles/styles";
@@ -7,6 +7,39 @@ import DataContext from "../context/DataContext";
 
 const HomeScreen = () => {
   const covidData = useContext(DataContext);
+  const [dailyActive, setDailyActive] = useState(0);
+  const [dailyNew, setDailyNew] = useState(0);
+  const [dailyDeaths, setDailyDeaths] = useState(0);
+
+  const getTotalNumbers = async () => {
+    let activeTot = 0;
+    let newTot = 0;
+    let deathTot = 0;
+
+    covidData.forEach((item) => {
+      if (item.cases.active && item.cases.active > 1) {
+        activeTot += item.cases.active;
+      }
+
+      if (item.cases.new !== null) {
+        const formattedTot = parseInt(item.cases.new.slice(1));
+        newTot += formattedTot;
+      }
+
+      if (item.deaths.new && item.deaths.new > 1) {
+        deathTot += parseInt(item.deaths.new);
+      }
+    });
+    setDailyActive(activeTot);
+    setDailyNew(newTot);
+    setDailyDeaths(deathTot);
+  };
+
+  useEffect(() => {
+    (async () => {
+      await getTotalNumbers(covidData);
+    })();
+  }, []);
 
   return (
     <SafeAreaView style={base.container}>
@@ -20,10 +53,11 @@ const HomeScreen = () => {
           backgroundColor: "#FFC914",
           width: "100%",
           margin: "5%",
+          justifyContent: "center",
         }}
       >
-        <Text style={base.subheadingBold}>Daily Case Count:</Text>
-        <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
+        <Text style={base.subheadingBold}>Current Active Cases:</Text>
+        <Text style={base.bigNumber}>{dailyActive.toLocaleString()}</Text>
       </View>
       <View style={{ flex: 1, flexDirection: "row" }}>
         <View
@@ -34,8 +68,8 @@ const HomeScreen = () => {
             margin: "2%",
           }}
         >
-          <Text style={base.subheadingBold}>Recovered</Text>
-          <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
+          <Text style={base.subheadingBold}>Daily New</Text>
+          <Text style={base.smallNumber}>{dailyNew.toLocaleString()}</Text>
         </View>
         <View
           style={{
@@ -45,8 +79,8 @@ const HomeScreen = () => {
             margin: "2%",
           }}
         >
-          <Text style={base.subheadingBold}>Deaths</Text>
-          <Text style={base.bigNumber}>{covidData[0].cases.new}</Text>
+          <Text style={base.subheadingBold}>Daily Deaths</Text>
+          <Text style={base.smallNumber}>{dailyDeaths.toLocaleString()}</Text>
         </View>
       </View>
       <View style={styles.auth}>
