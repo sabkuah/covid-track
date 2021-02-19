@@ -12,7 +12,7 @@ export default StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#2E282A",
     alignItems: "center",
-    //justifyContent: "center",
+    justifyContent: "center",
   },
   heading: {
     color: "white",
@@ -39,5 +39,12 @@ export default StyleSheet.create({
     fontWeight: "700",
     fontSize: 15,
     alignSelf: "center",
+  },
+  bigNumber: {
+    color: "white",
+    alignSelf: "center",
+    fontWeight: "900",
+    fontSize: 50,
+    padding: "1%",
   },
 });

@@ -37,7 +37,7 @@ const ContinentSummary = ({ title, results, navigation }) => {
         <Card style={styles.card}>
           <CardItem style={{ backgroundColor: "#FFC914" }}>
             <Body>
-              <Text style={base.subheadingBold}>{title.toUpperCase()}</Text>
+              <Text style={styles.continentTitle}>{title.toUpperCase()}</Text>
               <View
                 style={{
                   flexDirection: "row",
@@ -45,16 +45,18 @@ const ContinentSummary = ({ title, results, navigation }) => {
                   padding: "3%",
                 }}
               >
-                <View>
-                  <Text style={({ margin: "1%" }, base.textBold)}>
-                    New: {getTotalNewCases()}
-                  </Text>
-                </View>
-                <View>
-                  <Text style={({ margin: "1%" }, base.textBold)}>
-                    Active: {getTotalActiveCases()}
-                  </Text>
-                </View>
+                <Text style={({ margin: "1%" }, base.textBold)}>
+                  New: {getTotalNewCases()}
+                </Text>
+
+                <Text
+                  style={
+                    ({ margin: "1%", justifyContent: "flex-end" },
+                    base.textBold)
+                  }
+                >
+                  Active: {getTotalActiveCases()}
+                </Text>
               </View>
             </Body>
           </CardItem>
@@ -66,11 +68,13 @@ const ContinentSummary = ({ title, results, navigation }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: "80%",
     backgroundColor: "#17BEBB",
   },
-  heading: {
-    fontWeight: "bold",
+  continentTitle: {
+    color: "#e4572e",
+    fontWeight: "700",
+    fontSize: 22,
+    alignSelf: "center",
   },
 });
 
