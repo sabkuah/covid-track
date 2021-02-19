@@ -40,4 +40,11 @@ export default StyleSheet.create({
     fontSize: 15,
     alignSelf: "center",
   },
+  bigNumber: {
+    color: "white",
+    alignSelf: "center",
+    fontWeight: "900",
+    fontSize: 50,
+    padding: "1%",
+  },
 });
