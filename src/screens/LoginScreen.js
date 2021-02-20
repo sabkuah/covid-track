@@ -26,9 +26,6 @@ const LoginScreen = ({ navigation }) => {
         var errorCode = error.code;
         var errorMessage = error.message;
       });
-
-    console.log("email>", email);
-    console.log("passowrd>", password);
   };
 
   const onRegisterPressed = async (e) => {

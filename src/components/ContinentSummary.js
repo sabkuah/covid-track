@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import { Card, CardItem, Body } from "native-base";
 import React, { useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
