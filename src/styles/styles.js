@@ -51,7 +51,7 @@ export default StyleSheet.create({
     color: "white",
     alignSelf: "center",
     fontWeight: "900",
-    fontSize: 40,
+    fontSize: 30,
     padding: "1%",
   },
 });
