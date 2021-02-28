@@ -2,14 +2,17 @@
 
 sabkuah, Feb 13
 
+![Covid-Track ScreenShot of App](covid-track.gif)
+![Covid-Track ScreenShot of Auth](covid-track-auth.gif)
+
 ## Features
 
 - Consume Covid-19 Data API
 - Platform specific drawer / bottom tab navigation
 - Firebase authentication to store user's location
 - Display case numbers
-- Search by location
-- Display information using cluster maps with MapBox
+- Search by country
+- Display location with react-native-maps & MapBox
 
 ## Screens
 
