@@ -2,22 +2,27 @@
 
 sabkuah, Feb 13
 
+<img src="covid-track.gif" alt="screenshot of covid-track app" width="200"> 
+<img src="covid-track-auth.gif" alt="screenshot of auth in app" width="200">
+
+Screenshot-1: Landing page of App shows global tallies of covid-19 cases.  User can navigate to continent-specific numbers using the bottom navigation.  Country-specific screens show the daily totals for the country and displays location on a map. 
+
+Screenshot-2: User authentication is powered by Firebase.  
+
 ## Features
 
 - Consume Covid-19 Data API
 - Platform specific drawer / bottom tab navigation
 - Firebase authentication to store user's location
 - Display case numbers
-- Search by location
-- Display information using cluster maps with MapBox
+- Search by country
+- Display location with react-native-maps & MapBox
 
 ## Screens
 
-(\*) = on navigation
-
-- User Dashboard\* - displays information specific for user's stored location
-- Global\* - displays cluster map of cases world-wide
-- Home\* - displays latest totals & login button for redirect if user is not signed in
+- User Dashboard - displays information specific for user's stored location
+- Global - displays cluster map of cases world-wide
+- Home - displays latest totals & login button for redirect if user is not signed in
 - Login Screen - email, password
 - Register screen - email, location, password
 
